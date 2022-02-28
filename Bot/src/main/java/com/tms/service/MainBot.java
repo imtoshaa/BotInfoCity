@@ -1,6 +1,5 @@
 package com.tms.service;
 
-import lombok.SneakyThrows;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -18,8 +17,7 @@ import static com.tms.database.Cities.*;
 
 public class MainBot extends TelegramLongPollingBot {
 
-    @SneakyThrows
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TelegramApiException {
         MainBot bot = new MainBot();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         telegramBotsApi.registerBot(bot);
