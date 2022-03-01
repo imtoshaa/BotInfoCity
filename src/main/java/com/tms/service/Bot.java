@@ -1,5 +1,7 @@
 package com.tms.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -15,14 +17,15 @@ import java.util.Optional;
 
 import static com.tms.database.Cities.*;
 
-public class MainBot extends TelegramLongPollingBot {
+@Component
+@RequiredArgsConstructor
+public class Bot extends TelegramLongPollingBot {
 
-    public static void main(String[] args) throws TelegramApiException {
-        MainBot bot = new MainBot();
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-        telegramBotsApi.registerBot(bot);
-
-    }
+//    public static void main(String[] args) throws TelegramApiException {
+//        Bot bot = new Bot();
+//        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+//        telegramBotsApi.registerBot(bot);
+//    }
 
     @Override
     public String getBotUsername() {
