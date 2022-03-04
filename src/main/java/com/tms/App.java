@@ -1,4 +1,4 @@
-package com.tms.service;
+package com.tms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,6 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-// Аннотация, которая объединяет в себя @Configuration, @EnableAutoConfiguration, @ComponentScan
 @SpringBootApplication
 public class App {
     public static void main(String[] args) throws TelegramApiException {

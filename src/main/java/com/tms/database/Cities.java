@@ -21,23 +21,20 @@ public enum Cities {
     public static final List<List<InlineKeyboardButton>> BUTTONS = new ArrayList<>();
 
     static {
-        BUTTONS.add(
-                Arrays.asList(
-                        InlineKeyboardButton.builder()
+        BUTTONS.add(List.of(InlineKeyboardButton.builder()
                                 .text(MINSK.getCityName())
                                 .callbackData(MINSK.getCityName())
-                                .build(),
-                        InlineKeyboardButton.builder()
+                                .build()));
+        BUTTONS.add(List.of(InlineKeyboardButton.builder()
                                 .text(ZHODINO.getCityName())
                                 .callbackData(ZHODINO.getCityName())
                                 .build()));
-        BUTTONS.add(
-                Arrays.asList(
-                        InlineKeyboardButton.builder()
+        BUTTONS.add(List.of(InlineKeyboardButton.builder()
                                 .text(MOSCOW.getCityName())
                                 .callbackData(MOSCOW.getCityName())
-                                .build(),
-                        InlineKeyboardButton.builder()
+                                .build()));
+
+        BUTTONS.add(List.of(InlineKeyboardButton.builder()
                                 .text(NEWYORK.getCityName())
                                 .callbackData(NEWYORK.getCityName())
                                 .build()));

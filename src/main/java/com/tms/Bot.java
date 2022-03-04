@@ -1,4 +1,4 @@
-package com.tms.service;
+package com.tms;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -57,6 +57,9 @@ public class Bot extends TelegramLongPollingBot {
     private void handleCallback(CallbackQuery callbackQuery) throws TelegramApiException {
         String message = "";
         switch (callbackQuery.getData()) {
+            //куча разных мануалов по подключению библиотеки, разные способы, но ни одного,
+//            как использовать. Мне нужно выянуть данные из БД вот сюда. Скажите чем конкретно нужно пользоваться
+//            а дальше я сам почитаю и разберусь
             case "Минск" -> message = MINSK.getInfo();
             case "Жодино" -> message = ZHODINO.getInfo();
             case "Москва" -> message = MOSCOW.getInfo();
