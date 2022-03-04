@@ -1,5 +1,8 @@
 package com.tms;
 
+import com.tms.dao.CityDao;
+import com.tms.entities.CityEntity;
+import com.tms.repositories.CitiesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -13,6 +16,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.tms.database.Cities.*;
@@ -20,12 +24,6 @@ import static com.tms.database.Cities.*;
 @Component
 @RequiredArgsConstructor
 public class Bot extends TelegramLongPollingBot {
-
-//    public static void main(String[] args) throws TelegramApiException {
-//        Bot bot = new Bot();
-//        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-//        telegramBotsApi.registerBot(bot);
-//    }
 
     @Override
     public String getBotUsername() {
@@ -56,11 +54,10 @@ public class Bot extends TelegramLongPollingBot {
 
     private void handleCallback(CallbackQuery callbackQuery) throws TelegramApiException {
         String message = "";
+        CityDao cityDao = new CityDao();
+        List<CityEntity> entities = cityDao.findAll();
         switch (callbackQuery.getData()) {
-            //куча разных мануалов по подключению библиотеки, разные способы, но ни одного,
-//            как использовать. Мне нужно выянуть данные из БД вот сюда. Скажите чем конкретно нужно пользоваться
-//            а дальше я сам почитаю и разберусь
-            case "Минск" -> message = MINSK.getInfo();
+            case "Минск" -> message = entities.get(1).getInfo();
             case "Жодино" -> message = ZHODINO.getInfo();
             case "Москва" -> message = MOSCOW.getInfo();
             case "Нью-Йорк" -> message = NEWYORK.getInfo();
