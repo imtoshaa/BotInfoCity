@@ -1,5 +1,6 @@
-package com.tms.service;
+package com.tms.utils;
 
+import com.tms.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
