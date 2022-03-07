@@ -1,5 +1,7 @@
-package com.tms;
+package com.tms.service;
 
+import com.tms.model.City;
+import com.tms.model.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
