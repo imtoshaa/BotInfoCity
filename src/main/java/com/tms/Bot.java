@@ -1,6 +1,7 @@
 package com.tms;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -13,8 +14,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Optional;
 
-import static com.tms.database.Cities.*;
-
 @Component
 @RequiredArgsConstructor
 public class Bot extends TelegramLongPollingBot {
@@ -24,6 +23,12 @@ public class Bot extends TelegramLongPollingBot {
 //        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
 //        telegramBotsApi.registerBot(bot);
 //    }
+
+    @Autowired
+    private CityService cityService;
+
+    @Autowired
+    private ButtonsBuilder buttonsBuilder;
 
     @Override
     public String getBotUsername() {
@@ -54,12 +59,13 @@ public class Bot extends TelegramLongPollingBot {
 
     private void handleCallback(CallbackQuery callbackQuery) throws TelegramApiException {
         String message = "";
-        switch (callbackQuery.getData()) {
-            case "Минск" -> message = MINSK.getInfo();
-            case "Жодино" -> message = ZHODINO.getInfo();
-            case "Москва" -> message = MOSCOW.getInfo();
-            case "Нью-Йорк" -> message = NEWYORK.getInfo();
-        };
+        message = cityService.get(callbackQuery.getData()).getInfo();
+//        switch (callbackQuery.getData()) {
+//            case "Минск" -> message = cityService.get("Минск").getInfo();
+//            case "Жодино" -> message = cityService.get("Жодино").getInfo();
+//            case "Москва" -> message = cityService.get("Москва").getInfo();
+//            case "Нью-Йорк" -> message = cityService.get("Нью-Йорк").getInfo();
+//        };
         execute(SendMessage.builder()
                 .text(message)
                 .chatId(callbackQuery.getMessage().getChatId().toString())
@@ -77,7 +83,7 @@ public class Bot extends TelegramLongPollingBot {
                         execute(SendMessage.builder()
                                 .text("Выберите интересующий Вас город!")
                                 .chatId(message.getChatId().toString())
-                                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(BUTTONS).build())
+                                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttonsBuilder.getButtons()).build())
                                 .build());
                     }
                 }

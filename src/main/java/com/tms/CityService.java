@@ -18,12 +18,12 @@ public class CityService {
         repo.save(city);
     }
 
-    public City get(Long id) {
-        return repo.findById(id).get();
+    public City get(String name) {
+        return repo.findById(name).get();
     }
 
-    public void delete(Long id) {
-        repo.deleteById(id);
+    public void delete(String name) {
+        repo.deleteById(name);
     }
 
 }

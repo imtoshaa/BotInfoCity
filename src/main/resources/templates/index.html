@@ -5,6 +5,25 @@
     <title>BotInfoCity</title>
 </head>
 <body>
+<div align="center">
+    <h1>BotInfoCity</h1>
+    <a href="new">Create</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Город</th>
+            <th>Информация о городе</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="city : ${listCities}">
+            <td th:text="${city.name}">Название города</td>
+            <td th:text="${city.info}">Информация о городе</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>
