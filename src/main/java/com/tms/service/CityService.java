@@ -10,22 +10,22 @@ import java.util.List;
 @Service
 public class CityService {
     @Autowired
-    private CityRepository repo;
+    private CityRepository cityRepository;
 
-    public List<City> listAll() {
-        return repo.findAll();
+    public List<City> findAll() {
+        return cityRepository.findAll();
     }
 
     public void save(City city) {
-        repo.save(city);
+        cityRepository.save(city);
     }
 
-    public City get(String name) {
-        return repo.findById(name).get();
+    public City getByName(String name) {
+        return cityRepository.findById(name).get();
     }
 
     public void delete(String name) {
-        repo.deleteById(name);
+        cityRepository.deleteById(name);
     }
 
 }

@@ -17,7 +17,7 @@ public class ButtonsBuilder {
 
     public List<List<InlineKeyboardButton>> getButtons() {
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-        for (City city : cityService.listAll()) {
+        for (City city : cityService.findAll()) {
             buttons.add(
                     Arrays.asList(
                             InlineKeyboardButton.builder()

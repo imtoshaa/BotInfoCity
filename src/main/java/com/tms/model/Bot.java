@@ -34,11 +34,11 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "@AntonAuBot";
+        return "@InformationAboutCitiesBot";
     }
 
     public String getBotToken() {
-        return "5078182335:AAGMmZUNHicZ5XtDAgNpKN05n6YYUhdZE6s";
+        return "5195837401:AAHotbJz7rDMqwe8oH0k33oyhf73OIXdbEg";
     }
 
     @Override
@@ -61,13 +61,7 @@ public class Bot extends TelegramLongPollingBot {
 
     private void handleCallback(CallbackQuery callbackQuery) throws TelegramApiException {
         String message = "";
-        message = cityService.get(callbackQuery.getData()).getInfo();
-//        switch (callbackQuery.getData()) {
-//            case "Минск" -> message = cityService.get("Минск").getInfo();
-//            case "Жодино" -> message = cityService.get("Жодино").getInfo();
-//            case "Москва" -> message = cityService.get("Москва").getInfo();
-//            case "Нью-Йорк" -> message = cityService.get("Нью-Йорк").getInfo();
-//        };
+        message = cityService.getByName(callbackQuery.getData()).getInfo();
         execute(SendMessage.builder()
                 .text(message)
                 .chatId(callbackQuery.getMessage().getChatId().toString())
@@ -77,10 +71,26 @@ public class Bot extends TelegramLongPollingBot {
     private void handleMessage(Message message) throws TelegramApiException {
         if (message.hasText() && message.hasEntities()) {
             Optional<MessageEntity> commandEntities =
-                    message.getEntities().stream().filter(e -> "bot_command".equals(e.getType())).findFirst(); //ищем команду в строке
-            if (commandEntities.isPresent()) { //если команда существует
+                    message.getEntities().stream().filter(e -> "bot_command".equals(e.getType())).findFirst();
+            if (commandEntities.isPresent()) {
                 String command = message.getText().substring(commandEntities.get().getOffset(), commandEntities.get().getLength());
-                switch (command) { //это если вдруг будем расширять бота и записывать новые команды
+                switch (command) {
+                    case "/start" -> {
+                        execute(SendMessage.builder()
+                                .text("""
+                                        Вас приветствует бот, рассказывающий о городах!
+                                        Чтобы вывести информацию о поддерживаемых командах введите команду /help (ну или тыкните на ссылку)""")
+                                .chatId(message.getChatId().toString())
+                                .build());
+                    }
+                    case "/help" -> {
+                        execute(SendMessage.builder()
+                                .text("""
+                                        Бот поддерживает следующие команды:
+                                        /choose_a_city ---> выбрать интересующий Вас город.""")
+                                .chatId(message.getChatId().toString())
+                                .build());
+                    }
                     case "/choose_a_city" -> {
                         execute(SendMessage.builder()
                                 .text("Выберите интересующий Вас город!")

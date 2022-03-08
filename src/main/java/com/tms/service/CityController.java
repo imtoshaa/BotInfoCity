@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-public class AppController {
+public class CityController {
     @Autowired
     private CityService service;
 
     @RequestMapping("/")
     public String viewHomePage(Model model) {
-        List<City> listCities = service.listAll();
+        List<City> listCities = service.findAll();
         model.addAttribute("listCities", listCities);
         return "index";
     }
