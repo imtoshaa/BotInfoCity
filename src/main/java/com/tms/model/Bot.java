@@ -73,6 +73,7 @@ public class Bot extends TelegramLongPollingBot {
                         execute(SendMessage.builder()
                                 .text("""
                                         Вас приветствует бот, рассказывающий о городах!
+                                        Хочешь узнать что-то новое?
                                         Чтобы вывести информацию о поддерживаемых командах введите команду /help (ну или тыкните на ссылку)""")
                                 .chatId(message.getChatId().toString())
                                 .build());
