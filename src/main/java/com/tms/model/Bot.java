@@ -20,12 +20,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class Bot extends TelegramLongPollingBot {
 
-//    public static void main(String[] args) throws TelegramApiException {
-//        Bot bot = new Bot();
-//        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-//        telegramBotsApi.registerBot(bot);
-//    }
-
     @Autowired
     private CityService cityService;
 
