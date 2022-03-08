@@ -83,7 +83,8 @@ public class Bot extends TelegramLongPollingBot {
                         execute(SendMessage.builder()
                                 .text("""
                                         Бот поддерживает следующие команды:
-                                        /choose_a_city ---> выбрать интересующий Вас город.""")
+                                        /choose_a_city ---> выбрать интересующий Вас город.
+                                        Ты также можешь добавить свой город в базу! Перейди на сайт https://botinfocity.herokuapp.com/ и заполни форму :)""")
                                 .chatId(message.getChatId().toString())
                                 .build());
                     }
